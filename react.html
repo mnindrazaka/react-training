@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root" class="btn btn-primary"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const Button = (props) => {
+        return (
+          <button
+            onClick={props.onClick}
+            style={{ backgroundColor: "blue", color: "white" }}
+          >
+            {props.title}
+          </button>
+        );
+      };
+
+      const Todolist = () => {
+        const [inputValue, setInputValue] = React.useState("");
+        const [todos, setTodos] = React.useState(["mandi", "ngoding", "makan"]);
+
+        const onChangeInput = (event) => {
+          setInputValue(event.target.value);
+        };
+
+        const onReset = () => {
+          setInputValue("");
+        };
+
+        const onSubmit = () => {
+          setTodos([...todos, inputValue]);
+        };
+
+        return (
+          <div>
+            <input
+              value={inputValue}
+              onChange={onChangeInput}
+              type="text"
+              placeholder="input todo"
+            />
+            <Button title="reset" onClick={onReset} />
+            <Button title="submit" onClick={onSubmit} />
+            <ol>
+              {todos.map((todo) => (
+                <li>{todo}</li>
+              ))}
+            </ol>
+          </div>
+        );
+      };
+
+      const Counter = (props) => {
+        const [counter, setCounter] = React.useState(props.counter);
+
+        const onPlusClick = () => {
+          setCounter(counter + 1);
+        };
+
+        const onMinusClick = () => {
+          setCounter(counter - 1);
+        };
+
+        const onResetClick = () => {
+          setCounter(0);
+        };
+
+        return (
+          <div>
+            <Button title="-" onClick={onMinusClick} />
+            <Button title="+" onClick={onPlusClick} />
+            <Button title="reset" onClick={onResetClick} />
+            <p id="counterDisplay">{counter}</p>
+          </div>
+        );
+      };
+
+      const useProductList = () => {
+        const [inputValue, setInputValue] = React.useState("");
+        const [products, setProducts] = React.useState([]);
+        const [isLoading, setIsLoading] = React.useState(false);
+
+        React.useEffect(() => {
+          setIsLoading(true);
+          const timeoutId = setTimeout(() => {
+            fetch(`https://dummyjson.com/products/search?q=${inputValue}`)
+              .then((res) => res.json())
+              .then((res) => {
+                setIsLoading(false);
+                setProducts(res.products);
+              });
+          }, 500);
+
+          return () => {
+            clearTimeout(timeoutId);
+          };
+        }, [inputValue]);
+
+        return { inputValue, setInputValue, products, isLoading };
+      };
+
+      const ProductList = () => {
+        const { inputValue, setInputValue, isLoading, products } =
+          useProductList();
+
+        const onChangeInput = (event) => {
+          setInputValue(event.target.value);
+        };
+
+        return (
+          <div>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={onChangeInput}
+              placeholder="search product"
+            />
+            {isLoading ? (
+              <p>loading...</p>
+            ) : (
+              <ol>
+                {products.map((product) => (
+                  <li>{product.title}</li>
+                ))}
+              </ol>
+            )}
+          </div>
+        );
+      };
+
+      const NotFound = () => {
+        return <p>404 Not Found</p>;
+      };
+
+      const Navbar = (props) => {
+        const paths = [
+          { title: "Product List", url: "/" },
+          { title: "Todolist", url: "/todos" },
+          { title: "Counter", url: "/counter" },
+        ];
+
+        return (
+          <ul>
+            {paths.map((path) => (
+              <li onClick={() => props.onPathChange(path.url)}>{path.title}</li>
+            ))}
+          </ul>
+        );
+      };
+
+      const App = () => {
+        const [path, setPath] = React.useState("/");
+
+        React.useEffect(() => {
+          window.history.pushState(null, "", path);
+        }, [path]);
+
+        const onPathChange = (path) => {
+          setPath(path);
+        };
+
+        const onButtonClick = () => {
+          setCounter(counter + 1);
+        };
+
+        return (
+          <div>
+            <Navbar onPathChange={onPathChange} />
+            {path === "/" ? (
+              <ProductList />
+            ) : path === "/todos" ? (
+              <Todolist />
+            ) : path === "/counter" ? (
+              <div>
+                <Counter counter={1} />
+              </div>
+            ) : (
+              <NotFound />
+            )}
+          </div>
+        );
+      };
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

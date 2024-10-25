@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      let counter = 0;
+
+      const counterDisplay = document.createElement("p");
+      counterDisplay.textContent = JSON.stringify(counter);
+
+      const buttonPlus = document.createElement("button");
+      buttonPlus.textContent = "+";
+      buttonPlus.onclick = () => {
+        counter++;
+        counterDisplay.textContent = JSON.stringify(counter);
+      };
+
+      const buttonMinus = document.createElement("button");
+      buttonMinus.textContent = "-";
+      buttonMinus.onclick = () => {
+        counter--;
+        counterDisplay.textContent = JSON.stringify(counter);
+      };
+
+      const root = document.getElementById("root");
+      root.append(buttonMinus, buttonPlus, counterDisplay);
+    </script>
+  </body>
+</html>
