@@ -1,7 +1,7 @@
-import { Button } from "./Button";
+import { Button } from "../components/Button";
 import React from "react";
 
-export const Todolist = () => {
+export const TodolistScreen = () => {
   const [inputValue, setInputValue] = React.useState("");
   const [todos, setTodos] = React.useState(["mandi", "ngoding", "makan"]);
 

@@ -1,5 +1,5 @@
 import React from "react";
 
-export const NotFound = () => {
+export const NotFoundScreen = () => {
   return <p>404 Not Found</p>;
 };

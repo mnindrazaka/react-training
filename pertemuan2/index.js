@@ -12,7 +12,6 @@
 
 const express = require("express");
 const path = require("path");
-const App = require("./src/App");
 
 const app = express();
 

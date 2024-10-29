@@ -1,16 +1,11 @@
 import React from "react";
+import { paths } from "../routes";
 
 export type NavbarProps = {
   onPathChange: (url: string) => void;
 };
 
 export const Navbar = (props: NavbarProps) => {
-  const paths = [
-    { title: "Product List", url: "/" },
-    { title: "Todolist", url: "/todos" },
-    { title: "Counter", url: "/counter" },
-  ];
-
   return (
     <ul>
       {paths.map((path) => (

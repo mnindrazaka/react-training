@@ -1,8 +1,6 @@
-import { Navbar } from "./Navbar";
-import { ProductList } from "./ProductList";
-import { Todolist } from "./Todolist";
-import { Counter } from "./Counter";
-import { NotFound } from "./NotFound";
+import { Navbar } from "./components/Navbar";
+import { NotFoundScreen } from "./screens/NotFoundScreen";
+import { paths } from "./routes";
 import React from "react";
 
 export const App = () => {
@@ -16,20 +14,12 @@ export const App = () => {
     setPath(path);
   };
 
+  const Screen = paths.find(({ url }) => url === path)?.Screen;
+
   return (
     <div>
       <Navbar onPathChange={onPathChange} />
-      {path === "/" ? (
-        <ProductList />
-      ) : path === "/todos" ? (
-        <Todolist />
-      ) : path === "/counter" ? (
-        <div>
-          <Counter />
-        </div>
-      ) : (
-        <NotFound />
-      )}
+      {Screen ? <Screen /> : <NotFoundScreen />}
     </div>
   );
 };
