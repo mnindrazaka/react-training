@@ -1,7 +1,8 @@
 import { Button } from "./Button";
+import React from "react";
 
-export const Counter = (props) => {
-  const [counter, setCounter] = React.useState(props.counter);
+export const Counter = () => {
+  const [counter, setCounter] = React.useState(0);
 
   const onPlusClick = () => {
     setCounter(counter + 1);

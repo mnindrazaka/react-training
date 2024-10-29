@@ -3,6 +3,7 @@ import { ProductList } from "./ProductList";
 import { Todolist } from "./Todolist";
 import { Counter } from "./Counter";
 import { NotFound } from "./NotFound";
+import React from "react";
 
 export const App = () => {
   const [path, setPath] = React.useState(window.location.pathname);
@@ -11,12 +12,8 @@ export const App = () => {
     window.history.pushState(null, "", path);
   }, [path]);
 
-  const onPathChange = (path) => {
+  const onPathChange = (path: string) => {
     setPath(path);
-  };
-
-  const onButtonClick = () => {
-    setCounter(counter + 1);
   };
 
   return (
@@ -28,7 +25,7 @@ export const App = () => {
         <Todolist />
       ) : path === "/counter" ? (
         <div>
-          <Counter counter={1} />
+          <Counter />
         </div>
       ) : (
         <NotFound />

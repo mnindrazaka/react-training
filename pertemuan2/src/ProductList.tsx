@@ -1,6 +1,19 @@
+import React from "react";
+
+type Product = {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+};
+
 const useProductList = () => {
   const [inputValue, setInputValue] = React.useState("");
-  const [products, setProducts] = React.useState([]);
+  const [products, setProducts] = React.useState<Product[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
@@ -25,7 +38,7 @@ const useProductList = () => {
 export const ProductList = () => {
   const { inputValue, setInputValue, isLoading, products } = useProductList();
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 

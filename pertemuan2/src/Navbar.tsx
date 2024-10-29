@@ -1,4 +1,10 @@
-export const Navbar = (props) => {
+import React from "react";
+
+export type NavbarProps = {
+  onPathChange: (url: string) => void;
+};
+
+export const Navbar = (props: NavbarProps) => {
   const paths = [
     { title: "Product List", url: "/" },
     { title: "Todolist", url: "/todos" },

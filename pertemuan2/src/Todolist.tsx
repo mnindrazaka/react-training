@@ -1,10 +1,11 @@
 import { Button } from "./Button";
+import React from "react";
 
 export const Todolist = () => {
   const [inputValue, setInputValue] = React.useState("");
   const [todos, setTodos] = React.useState(["mandi", "ngoding", "makan"]);
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
