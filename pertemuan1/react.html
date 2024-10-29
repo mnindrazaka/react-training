@@ -57,8 +57,8 @@
             <Button title="reset" onClick={onReset} />
             <Button title="submit" onClick={onSubmit} />
             <ol>
-              {todos.map((todo) => (
-                <li>{todo}</li>
+              {todos.map((todo, index) => (
+                <li key={index}>{todo}</li>
               ))}
             </ol>
           </div>
@@ -134,8 +134,8 @@
               <p>loading...</p>
             ) : (
               <ol>
-                {products.map((product) => (
-                  <li>{product.title}</li>
+                {products.map((product, index) => (
+                  <li key={index}>{product.title}</li>
                 ))}
               </ol>
             )}
