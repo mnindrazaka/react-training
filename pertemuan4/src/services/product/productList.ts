@@ -8,12 +8,15 @@ export const fetchProductList = (keyword: string) => {
     .then((data) => data as ProductListResponse);
 };
 
-export const useProductList = () => {
+export const useProductList = (params: {
+  productListResponse?: ProductListResponse;
+}) => {
   const [keyword, setKeyword] = useState<string>("");
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["products", keyword],
     queryFn: () => fetchProductList(keyword),
+    initialData: params.productListResponse,
   });
 
   useEffect(() => {

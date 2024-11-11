@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { useProductDelete, useProductList } from "@/services/product";
+import {
+  ProductListResponse,
+  useProductDelete,
+  useProductList,
+} from "@/services/product";
 import { EmptyView, ErrorView } from "@/components/base";
 import { ProductPreviewCard } from "@/components/product";
 import { useRouter } from "next/router";
@@ -8,9 +12,15 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Layout } from "@/components/base/Layout";
 
-export const ProductListScreen = () => {
+export type ProductListScreenProps = {
+  productListResponse?: ProductListResponse;
+};
+
+export const ProductListScreen = ({
+  productListResponse,
+}: ProductListScreenProps) => {
   const { products, isLoading, errorMessage, refetch, keyword, setKeyword } =
-    useProductList();
+    useProductList({ productListResponse });
 
   const {
     errorMessage: errorMessageDelete,
