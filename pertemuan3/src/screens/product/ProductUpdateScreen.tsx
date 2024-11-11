@@ -16,7 +16,7 @@ export const ProductUpdateScreen = () => {
   }, [errorMessage]);
 
   return (
-    <div>
+    <div style={{ padding: 15 }}>
       <h1>Update Product</h1>
       <ProductForm
         isLoading={isLoading}

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { ProductDetailResponse, ProductUpdateBody } from "./types";
 
 export const fetchProductById = (productId: string) => {
-  return fetch(`http://192.168.1.35:8080/products/${productId}`)
+  return fetch(`http://192.168.1.23:8080/products/${productId}`)
     .then((res) => res.json())
     .then((data) => data as ProductDetailResponse);
 };
 
 export const updateProduct = (product: ProductUpdateBody) => {
-  return fetch("http://192.168.1.35:8080/products/update", {
+  return fetch("http://192.168.1.23:8080/products/update", {
     method: "POST",
     body: JSON.stringify(product),
     headers: { "Content-Type": "application/json" },

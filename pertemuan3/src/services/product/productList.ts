@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProductListResponse, ProductPreview } from "./types";
 
 export const fetchProductList = (keyword: string) => {
-  return fetch(`http://192.168.1.35:8080/products?keyword=${keyword}`)
+  return fetch(`http://192.168.1.23:8080/products?keyword=${keyword}`)
     .then((res) => res.json())
     .then((data) => data as ProductListResponse);
 };

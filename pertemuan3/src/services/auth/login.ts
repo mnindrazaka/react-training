@@ -3,7 +3,7 @@ import { LoginBody, LoginResponse } from "./types";
 import { TokenContext } from "../../Token";
 
 export const login = (loginBody: LoginBody) => {
-  return fetch("http://192.168.1.35:8080/auth/login", {
+  return fetch("http://192.168.1.23:8080/auth/login", {
     method: "POST",
     body: JSON.stringify(loginBody),
     headers: { "Content-Type": "application/json" },

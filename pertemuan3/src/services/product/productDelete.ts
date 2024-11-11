@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProductDeleteResponse } from "./types";
 
 export const deleteProduct = (productId: string) => {
-  return fetch(`http://192.168.1.35:8080/products/delete`, {
+  return fetch(`http://192.168.1.23:8080/products/delete`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

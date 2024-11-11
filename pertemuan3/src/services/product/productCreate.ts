@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProductCreateBody, ProductCreateResponse } from "./types";
 
 export const createProduct = (product: ProductCreateBody) => {
-  return fetch("http://192.168.1.35:8080/products/create", {
+  return fetch("http://192.168.1.23:8080/products/create", {
     method: "POST",
     body: JSON.stringify(product),
     headers: { "Content-Type": "application/json" },
